@@ -21,6 +21,6 @@ describe('Facebook Login Page Test', () => {
         await loginButton.click();
 
         // Wait for some time to see result
-        await browser.pause(3000);
+        await browser.pause(5000);
 
         //
