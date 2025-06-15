@@ -1,26 +1,15 @@
-describe('Facebook Login Page Test', () => {
-    it('should open Facebook and try to login', async () => {
-        await browser.url('https://www.facebook.com/');
+describe('WebdriverIO Practice Test', () => {
+    it('should open WebdriverIO homepage and check the title', async () => {
+        // Open WebdriverIO website
+        await browser.url('https://webdriver.io');
 
-        // Accept cookies if popup appears
-        const acceptCookies = await $('button[data-cookiebanner="accept_button"]');
-        if (await acceptCookies.isDisplayed()) {
-            await acceptCookies.click();
-        }
+        // Get the title of the page
+        const title = await browser.getTitle();
 
-        // Enter email
-        const emailInput = await $('#email');
-        await emailInput.setValue('testuser@example.com');
+        // Print the title in terminal
+        console.log('Page title:', title);
 
-        // Enter password
-        const passwordInput = await $('#pass');
-        await passwordInput.setValue('TestPassword123');
-
-        // Click login button
-        const loginButton = await $('button[name="login"]');
-        await loginButton.click();
-
-        // Wait for some time to see result
-        await browser.pause(5000);
-
-        //
+        // Assertion to verify title is correct
+        expect(title).toContain('WebdriverIO');
+    });
+});
