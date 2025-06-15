@@ -1,2 +1,12 @@
+<<<<<<< HEAD
 node_modules\
 allure_report\
+=======
+node_modules/
+allure-report/
+
+
+
+# comment
+
+>>>>>>> 1ac9a03916a43070f1c0da74004048a252ee5240
