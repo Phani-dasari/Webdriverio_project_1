@@ -11,5 +11,6 @@ describe('WebdriverIO Practice Test', () => {
 
         // Assertion to verify title is correct
         expect(title).toContain('WebdriverIO');
+        await browser.url(5000);
     });
 });
