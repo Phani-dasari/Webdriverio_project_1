@@ -1,11 +1,13 @@
-const LoginPage = require('../../pageobjects/login.page');
+class LoginPage {
+    get usernameField() { return $('#username'); }
+    get passwordField() { return $('#password'); }
+    get loginButton()   { return $('#loginButton'); }
 
-describe('Snapchat Login Test', () => {
-    it('should login with valid credentials', async () => {
-        await LoginPage.open();
-        await LoginPage.login('snapuser', 'password123');
+    async login(username, password) {
+        await this.usernameField.setValue(username);
+        await this.passwordField.setValue(password);
+        await this.loginButton.click();
+    }
+}
 
-        // Example validation (customize as needed)
-        await expect(browser).toHaveUrlContaining('dashboard');
-    });
-});
+module.exports = new LoginPage();
