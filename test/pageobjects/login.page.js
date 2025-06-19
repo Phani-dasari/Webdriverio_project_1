@@ -1,13 +1,12 @@
 class LoginPage {
-    get usernameField() { return $('#username'); }
-    get passwordField() { return $('#password'); }
-    get loginButton()   { return $('#loginButton'); }
+  get username() { return $('#username'); }
+  get password() { return $('#password'); }
+  get loginBtn() { return $('#loginBtn'); }
 
-    async login(username, password) {
-        await this.usernameField.setValue(username);
-        await this.passwordField.setValue(password);
-        await this.loginButton.click();
-    }
+  async login(user, pass) {
+    await this.username.setValue(user);
+    await this.password.setValue(pass);
+    await this.loginBtn.click();
+  }
 }
-
 module.exports = new LoginPage();

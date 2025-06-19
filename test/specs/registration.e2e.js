@@ -1,22 +1,29 @@
-// test/specs/registration.e2e.js
+const path = require('path');
 
-const RegistrationPage = require('../pageobjects/registration.page');
+it('should upload a file during registration', async () => {
+    await RegistrationPage.open();
 
-describe('Registration Form Test', () => {
-    it('should register a new user successfully', async () => {
-        await RegistrationPage.open();
+    const testData = {
+        firstName: 'Phani',
+        lastName: 'Dasari',
+        email: 'phani@example.com',
+        mobile: '9876543210'
+    };
 
-        const testData = {
-            firstName: 'Phani',
-            lastName: 'Dasari',
-            email: 'phani@example.com',
-            mobile: '9876543210'
-        };
+    await RegistrationPage.fillForm(testData);
 
-        await RegistrationPage.fillForm(testData);
+    const filePath = path.join(__dirname, '../resources/testfile.png');
+    await RegistrationPage.uploadFile(filePath);
 
-        // Assert modal success title
-        await expect(RegistrationPage.modalTitle).toBeDisplayed();
-        await expect(RegistrationPage.modalTitle).toHaveTextContaining('Thanks for submitting the form');
-    });
+    await RegistrationPage.submitBtn.click();
+
+    await expect(RegistrationPage.modalTitle).toBeDisplayed();
+    const filePath = path.join(__dirname, '../resources/testfile.png');
+await RegistrationPage.uploadFile(filePath);
+
+// ⏸️ Pause for 1 minute (60000 ms)
+await browser.pause(60000);
+
+await RegistrationPage.submitBtn.click();
+
 });
