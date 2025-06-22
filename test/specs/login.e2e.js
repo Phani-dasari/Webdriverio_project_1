@@ -1,28 +1,27 @@
-describe('Bank Login Test', () => {
-  it('should login to the bank account', async () => {
-    // open bank login page
-    await browser.url('https://demo.guru99.com/V4/index.php');
+describe('Add to Cart Functionality - AutomationExercise', () => {
+  it('should add a product to the cart successfully', async () => {
+    await browser.url('https://automationexercise.com');
 
-    // locate username field
-    const userIdInput = await $('input[name="uid"]');
+    await browser.pause(2000);
+    await browser.execute(() => window.scrollBy(0, 600));
 
-    // locate password field
-    const passwordInput = await $('input[name="password"]');
+    const firstProduct = await $('.product-overlay');
+    await firstProduct.waitForDisplayed({ timeout: 5000 });
+    await firstProduct.moveTo
 
-    // locate login button
-    const loginButton = await $('input[name="btnLogin"]');
+    const addToCartBtn = await $('(//a[contains(text(),"Add to cart")])[1]');
+    await addToCartBtn.click();
 
-    // wait for fields to be displayed
-    await userIdInput.waitForDisplayed({ timeout: 5000 });
+    const modal = await $('#cartModal');
+    await modal.waitForDisplayed({ timeout: 5000 });
 
-    // enter login credentials
-    await userIdInput.setValue('mngr625501');     
-    await passwordInput.setValue('YzudErE');   
+    const continueBtn = await $('button[data-dismiss="modal"]');
+    await continueBtn.click();
 
-    // click login
-    await loginButton.click();
+    const cartBtn = await $('a[href="/view_cart"]');
+    await cartBtn.click();
 
-    // optional: wait for page load
-    await browser.pause(3000);
+    const cartProduct = await $('.cart_description');
+    await expect(cartProduct).toBeDisplayed();
   });
 });

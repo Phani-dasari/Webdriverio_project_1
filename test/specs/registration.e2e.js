@@ -1,29 +1,19 @@
-const path = require('path');
+describe('Forgot Password Functionality', () => {
+  it('should send reset link to valid email', async () => {
+    await browser.url('https://example.com/login');
 
-it('should upload a file during registration', async () => {
-    await RegistrationPage.open();
+    const forgotLink = await $('#forgotPasswordLink');
+    await forgotLink.click();
 
-    const testData = {
-        firstName: 'Phani',
-        lastName: 'Dasari',
-        email: 'phani@example.com',
-        mobile: '9876543210'
-    };
+    const emailInput = await $('#resetEmail');
+    const sendButton = await $('#sendResetButton');
 
-    await RegistrationPage.fillForm(testData);
+    await emailInput.setValue('phani@example.com');
+    await sendButton.click();
 
-    const filePath = path.join(__dirname, '../resources/testfile.png');
-    await RegistrationPage.uploadFile(filePath);
-
-    await RegistrationPage.submitBtn.click();
-
-    await expect(RegistrationPage.modalTitle).toBeDisplayed();
-    const filePath = path.join(__dirname, '../resources/testfile.png');
-await RegistrationPage.uploadFile(filePath);
-
-// ⏸️ Pause for 1 minute (60000 ms)
-await browser.pause(60000);
-
-await RegistrationPage.submitBtn.click();
-
+    const successMsg = await $('#successMessage');
+    await expect(successMsg).toBeDisplayed();
+    await expect(successMsg).toHaveTextContaining('Password reset link sent');
+  });
 });
+
